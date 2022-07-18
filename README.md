@@ -18,5 +18,5 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
 * [Open3D](http://www.open3d.org/)
 * [Nvidia Optix 5.11 - 6.0](https://developer.nvidia.com/designworks/optix/downloads/legacy)
 
-
-
+## Train models
+* Compile Optix-based shadow renderer with python binding. 
