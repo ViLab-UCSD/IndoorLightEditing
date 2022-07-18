@@ -27,4 +27,4 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
       * Go to [OptixRendererShadow](OptixRendererShadow) directory. Compile the code following this [link](https://github.com/lzqsd/OptixRenderer.git). 
 4. Modify the pytorch3D code to support RMSE chamfer distance loss.
       * Go to [chamfer.py](https://github.com/facebookresearch/pytorch3d/blob/main/pytorch3d/loss/chamfer.py). 
-      * Add flag `isRMSE = False` to function (chamfer_distance)[https://github.com/facebookresearch/pytorch3d/blob/main/pytorch3d/loss/chamfer.py#:~:text=def-,chamfer_distance,-(]
+      * Add flag `isRMSE = False` to function [chamfer_distance](https://github.com/facebookresearch/pytorch3d/blob/main/pytorch3d/loss/chamfer.py#:~:text=def-,chamfer_distance,-()
