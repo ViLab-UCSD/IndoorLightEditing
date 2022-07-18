@@ -19,4 +19,6 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
 * [Nvidia Optix 5.11 - 6.0](https://developer.nvidia.com/designworks/optix/downloads/legacy)
 
 ## Train models
-* Compile Optix-based shadow renderer with python binding. 
+1. Compile Optix-based shadow renderer with python binding. 
+  * Go to [OptixRendererShadow](OptixRendererShadow) directory. Compile the code following this [link](https://github.com/lzqsd/OptixRenderer.git). 
+2. Modify the pytorch3D loss function to support L1 chamfer distance loss. 
