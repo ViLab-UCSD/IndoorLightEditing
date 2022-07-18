@@ -20,6 +20,5 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
 
 ## Train and test models on OpenRooms dataset
 1. Download the [OpenRooms dataset](https://ucsd-openrooms.github.io/). 
-2. Compile Optix-based shadow renderer with python binding. 
-  * Go to [OptixRendererShadow](OptixRendererShadow) directory. Compile the code following this [link](https://github.com/lzqsd/OptixRenderer.git). 
+2. Compile Optix-based shadow renderer with python binding. Go to [OptixRendererShadow](OptixRendererShadow) directory. Compile the code following this [link](https://github.com/lzqsd/OptixRenderer.git). 
 3. Modify the pytorch3D loss function to support L1 chamfer distance loss. 
