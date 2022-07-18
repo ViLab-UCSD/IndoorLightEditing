@@ -34,7 +34,7 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
           cham_x = torch.sqrt(cham_x + 1e-6)
           cham_y = torch.sqrt(cham_y + 1e-6)
       ```
-4. Train models for material and light sources prediction. 
+4. Train models 
      * Train the material prediction network. 
      ```python
      python trainBRDF.py
@@ -46,3 +46,11 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
      python trainInvLamp.py        # Invisible lamp prediction
      python trainInvWindow.py      # Invisible window prediction
      ```
+     * Train the neural renderer
+     ```python
+     python trainShadowDepth.py --isGradLoss      # Train shadow prediction
+     python trainDirectIndirect.py                # Train global illumination prediction
+     python trainPerpixelLighting.py              # Train perpixel lighting prediction
+     ```
+5. Test models
+     * Test the material prediction network
