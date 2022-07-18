@@ -37,14 +37,14 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
 4. Train models 
      * Train the material prediction network. 
      ```python
-     python trainBRDF.py
+     python trainBRDF.py           # Train material prediction
      ```
      * Train light source prediction networks
      ```python
-     python trainVisLamp.py        # Visible lamp prediction
-     python trainVisWindow.py      # Visible window prediction
-     python trainInvLamp.py        # Invisible lamp prediction
-     python trainInvWindow.py      # Invisible window prediction
+     python trainVisLamp.py        # Train visible lamp prediction
+     python trainVisWindow.py      # Train visible window prediction
+     python trainInvLamp.py        # Train invisible lamp prediction
+     python trainInvWindow.py      # Train invisible window prediction
      ```
      * Train the neural renderer
      ```python
@@ -54,3 +54,14 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
      ```
 5. Test models
      * Test the material prediction network
+     ```python
+     python testBRDF.py            # Test BRDF prediction. Results in Table 5 in the supp.
+     ```
+     * Test light source prediction networks
+     ```python
+     python testVisLamp.py         # Test visible lamp prediction. Results in Table 3 in the main paper. 
+     python testVisWindow.py       # Test visible window prediction. Results in Table 3 in the main paper. 
+     python testInvLamp.py         # Test invisible lamp prediction. Results in Table 3 in the main paper.
+     python testInvWindow.py       # Test invisible window prediction. Results in Table 3 in the main paper.
+     ```
+     * Test 
