@@ -35,4 +35,11 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
           cham_y = torch.sqrt(cham_y + 1e-6)
       ```
 4. Train models for material and light sources prediction. 
-     * 
+     * Train `MNet` for material prediction. 
+     ```python
+     python trainBRDF.py
+     ```
+     * Train light source prediction networks
+     ```python
+     python train
+     ```
