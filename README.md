@@ -25,6 +25,12 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
 1. Download the [OpenRooms dataset](https://ucsd-openrooms.github.io/). 
 2. Compile Optix-based shadow renderer with python binding. 
       * Go to [OptixRendererShadow](OptixRendererShadow) directory. Compile the code following this [link](https://github.com/lzqsd/OptixRenderer.git). 
-4. Modify the pytorch3D code to support RMSE chamfer distance loss.
+3. Modify the pytorch3D code to support RMSE chamfer distance loss.
       * Go to [chamfer.py](https://github.com/facebookresearch/pytorch3d/blob/main/pytorch3d/loss/chamfer.py). 
-      * Add flag `isRMSE = False` to function [chamfer_distance](https://github.com/facebookresearch/pytorch3d/blob/main/pytorch3d/loss/chamfer.py#:~:text=def-,chamfer_distance,-)
+      * Add flag `isRMSE = False` to function `chamfer_distance`
+      * Modify function `chamfer_distance` by adding lines below after the definition of `cham_x` and `cham_y`
+      ```python
+      if isRMSE == True:
+          cham_x = torch.sqrt(cham_x + 1e-6)
+          cham_y = torch.sqrt(cham_y + 1e-6)
+      ```
