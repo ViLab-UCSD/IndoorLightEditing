@@ -128,7 +128,7 @@ def visLampLoss(
                     visLampPointsGt = samplePointsFromBoxSurf(
                             visLampCenterGt, visLampAxesGt, sampleNum )
 
-                    dist, _ = torch3dLoss.chamfer_distance(visLampPointsPred, visLampPointsGt, norm=1 )
+                    dist, _ = torch3dLoss.chamfer_distance(visLampPointsPred, visLampPointsGt, isRMSE=True )
 
                     if isTest:
                         visLampPointsErr += (dist ) * depthScaleBatch[m]
@@ -176,7 +176,7 @@ def visWindowLoss(
                     winPointsGt = samplePointsFromPlane(
                             visWinCenterGt, visWinYAxisGt, visWinXAxisGt, sampleNum )
 
-                    dist, _ = torch3dLoss.chamfer_distance(winPointsPred, winPointsGt, norm=1 )
+                    dist, _ = torch3dLoss.chamfer_distance(winPointsPred, winPointsGt, isRMSE=True )
 
                     if isTest:
                         visWinPointsErr += (dist * depthScaleBatch[m] )
@@ -250,7 +250,7 @@ def invLampLoss(
             invLampPointsGt = samplePointsFromBoxSurf(
                     invLampCenterGt, invLampAxisGt, sampleNum )
 
-            dist, _  = torch3dLoss.chamfer_distance(invLampPointsPred[m:m+1, :], invLampPointsGt, norm=1 )
+            dist, _  = torch3dLoss.chamfer_distance(invLampPointsPred[m:m+1, :], invLampPointsGt, isRMSE=True )
             if isTest:
                 invLampPointsErr += (dist * depthScaleBatch[m] )
             else:
@@ -303,7 +303,7 @@ def invWindowLoss(
             winPointsGt = samplePointsFromPlane(
                     invWinCenterGt, invWinYAxisGt, invWinXAxisGt, sampleNum )
 
-            dist, _ = torch3dLoss.chamfer_distance(winPointsPred[m:m+1, :], winPointsGt, norm=1 )
+            dist, _ = torch3dLoss.chamfer_distance(winPointsPred[m:m+1, :], winPointsGt, isRMSE=True )
 
             if isTest:
                 invWinPointsErr += (dist * depthScaleBatch[m ] )
