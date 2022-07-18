@@ -19,7 +19,11 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
 * [Nvidia Optix 5.11 - 6.0](https://developer.nvidia.com/designworks/optix/downloads/legacy)
 
 ## Train and test models on OpenRooms dataset
+
+![](Images/pipeline.png)
+
 1. Download the [OpenRooms dataset](https://ucsd-openrooms.github.io/). 
 2. Compile Optix-based shadow renderer with python binding. 
     * Go to [OptixRendererShadow](OptixRendererShadow) directory. Compile the code following this [link](https://github.com/lzqsd/OptixRenderer.git). 
-4. Modify the pytorch3D loss function to support L1 chamfer distance loss. 
+3. Train models on the OpenRooms dataset
+4. Test models on the OpenRooms dataset
