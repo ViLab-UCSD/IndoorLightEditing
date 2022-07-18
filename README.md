@@ -37,20 +37,20 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
 4. Train models 
      * Train the material prediction network. 
      ```python
-     python trainBRDF.py           # Train material prediction
+     python trainBRDF.py           # Train material prediction.
      ```
      * Train light source prediction networks
      ```python
-     python trainVisLamp.py        # Train visible lamp prediction
-     python trainVisWindow.py      # Train visible window prediction
-     python trainInvLamp.py        # Train invisible lamp prediction
-     python trainInvWindow.py      # Train invisible window prediction
+     python trainVisLamp.py        # Train visible lamp prediction.
+     python trainVisWindow.py      # Train visible window prediction.
+     python trainInvLamp.py        # Train invisible lamp prediction.
+     python trainInvWindow.py      # Train invisible window prediction.
      ```
      * Train the neural renderer
      ```python
-     python trainShadowDepth.py --isGradLoss      # Train shadow prediction
-     python trainDirectIndirect.py                # Train global illumination prediction
-     python trainPerpixelLighting.py              # Train perpixel lighting prediction
+     python trainShadowDepth.py --isGradLoss      # Train shadow prediction.
+     python trainDirectIndirect.py                # Train indirect illumination prediction.
+     python trainPerpixelLighting.py              # Train perpixel lighting prediction.
      ```
 5. Test models
      * Test the material prediction network
@@ -59,9 +59,15 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
      ```
      * Test light source prediction networks
      ```python
-     python testVisLamp.py         # Test visible lamp prediction. Results in Table 3 in the main paper. 
+     python testVisLamp.py         # Test visible lamp prediction. Results in Table 3 in the main paper.
      python testVisWindow.py       # Test visible window prediction. Results in Table 3 in the main paper. 
      python testInvLamp.py         # Test invisible lamp prediction. Results in Table 3 in the main paper.
      python testInvWindow.py       # Test invisible window prediction. Results in Table 3 in the main paper.
      ```
-     * Test 
+     * Test the neural renderer
+     ```python
+     python testShadowDepth.py --isGradLoss       # Test shadow prediction. Results in Table 2 in the main paper. 
+     python testDirectIndirect.py                 # Test indirect illumination prediction. 
+     python testPerpixelLighting.py               # Test perpixel lighting prediction. 
+     python testFull.py                           # Test the whole neural renderer with predicted light sources. Results in Table 4 in the main paper. 
+     ```
