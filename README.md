@@ -4,7 +4,7 @@ Zhengqin Li, Jia Shi, Sai Bi, Rui Zhu, Kalyan Sunkavalli, Miloš Hašan, Zexiang
 
 
 ## Related links:
-* Trained models: https://cseweb.ucsd.edu/~viscomp/projects/CVPR20InverseIndoor/models.zip
+* Trained models: 
 * Object insertion: https://github.com/lzqsd/VirtualObjectInsertion
 * Dataset: https://ucsd-openrooms.github.io/ 
 * Arxiv: https://arxiv.org/abs/2205.09343
