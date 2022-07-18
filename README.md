@@ -1,7 +1,7 @@
 # Physically-based Editing of Indoor Scene Lighting from a Single Image
 
 Zhengqin Li, Jia Shi, Sai Bi, Rui Zhu, Kalyan Sunkavalli, Miloš Hašan, Zexiang Xu, Ravi Ramamoorthi, Manmohan Chandraker
-
+![](Images/teaser.png)
 
 ## Related links:
 * [Trained models](https://drive.google.com/drive/folders/1jIaDIKKf3R_EpeMrxobA_HOMWO8D3W0C?usp=sharing)
