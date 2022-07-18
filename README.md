@@ -71,3 +71,5 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
      python testPerpixelLighting.py               # Test perpixel lighting prediction. 
      python testFull.py                           # Test the whole neural renderer with predicted light sources. Results in Table 4 in the main paper. 
      ```
+    
+## Scene editing applications on real images
