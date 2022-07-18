@@ -34,3 +34,5 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
           cham_x = torch.sqrt(cham_x + 1e-6)
           cham_y = torch.sqrt(cham_y + 1e-6)
       ```
+4. Train models for material and light sources prediction. 
+     * 
