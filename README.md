@@ -73,19 +73,33 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
      ```
     
 ## Scene editing applications on real images
-1. Prepare input data.
+1. Prepare input data. 
      * Create a root folder, e.g. `Example1`. 
      * Create a folder `Example1/input` for input data. The folder should include:
           * `image.png`:
           * `envMask.png`: 
-          * ``
+          * `lampMask_x.png`:
+          * `winMask_x.png`:
+     * Create `testList.txt`. Add absolute path of `Example1` to its first line. 
 3. Depth prediction.
      * Download [DPT](https://github.com/isl-org/DPT) and save it in folder `DPT`
-     * Run 
+     * Run python script `testRealDepth.py`
+     ```python
+     python testRealDepth.py --testList testList.txt
+     ```
 5. Material and light source prediction.
-```python
-python testR
-```
-7. Edit light sources, geometry or materials.
-8. Rerender the image with the neural renderer.
-
+     * Run python script `testRealBRDFLight.py`. Please add flag `--isOptimize` to improve quality.
+     ```python
+     python testRealBRDFLight.py --isOptimize
+     ```
+6. Edit light sources, geometry or materials.
+     * We prepare a list of edited examples from our teaser figure.
+          * Example1_changeAlbedo:
+          * Example1_addObject:
+          * Example1_addWindow_turnOffPredLamps:
+          * Example1_addLamp_turnOffPredLamps:
+          * Example1_turnOffVisLamp:
+          * Example1_turnOffInvLamp:
+     * Please check `README.md` inside each folder to see how to generate results.
+7. Rerender the image with the neural renderer.
+     
