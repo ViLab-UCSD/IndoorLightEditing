@@ -73,3 +73,5 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
      ```
     
 ## Scene editing applications on real images
+1. Depth prediction
+     * 
