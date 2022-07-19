@@ -77,9 +77,9 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
      * Create a root folder, e.g. `Example1`. 
      * Create a folder `Example1/input` for input data. The folder should include:
           * `image.png`: Input RGB image of resolution `240 x 320`
-          * `envMask.png`: An mask specify the re
-          * `lampMask_x.png`:
-          * `winMask_x.png`:
+          * `envMask.png`: A mask specify the indoor/outdoor regions, where 0 indicates outdoor (window) regions.
+          * `lampMask_x.png`: Masks for visible lamps. `x` is its ID starting from 0.
+          * `winMask_x.png`: Masks for visible windows. `x` is its ID starting from 0. 
      * Create `testList.txt`. Add absolute path of `Example1` to its first line. 
      * An example from our teaser figure can be found in [Example1]().
 3. Depth prediction. We use [DPT](https://github.com/isl-org/DPT) in our paper. Higher quality depth from RBGD sensor should lead to better results. 
