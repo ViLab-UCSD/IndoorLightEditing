@@ -207,7 +207,7 @@ if opt.experimentDirecIndirec is None:
 opt.experimentDirecIndirec = osp.join(curDir, opt.experimentDirecIndirec )
 
 if opt.experimentShadow is None:
-    opt.experimentShadow = 'check_shadowDepth'
+    opt.experimentShadow = 'check_shadowDepth_grad'
 opt.experimentShadow = osp.join(curDir, opt.experimentShadow )
 
 if opt.experimentShgEnv is None:
@@ -507,8 +507,8 @@ for dataId in range(max(opt.rs, 0), min(opt.re, len(dirList ) ) ):
             # Visible window parameters
             visWinCenterPreds, visWinNormalPreds, visWinXAxisPreds, visWinYAxisPreds,
             visWinSrcPreds, visWinSrcSkyPreds, visWinSrcGrdPreds,
-            depthDS if not opt.isHighRes else depthBatch,
-            normalDS if not opt.isHighRes else normalBatch,
+            depthBatch,
+            normalBatch,
             visWinShadowPreds
         )
 
@@ -516,9 +516,9 @@ for dataId in range(max(opt.rs, 0), min(opt.re, len(dirList ) ) ):
     visLampShadingPreds, visLampShadingNoPreds, \
         = renderVisLampArr(
             visLampCenterPreds, visLampSrcPreds,
-            lampMaskSmallBatch if not opt.isHighRes else lampMaskBatch,
-            depthDS if not opt.isHighRes else depthBatch,
-            normalDS if not opt.isHighRes else normalBatch,
+            lampMaskBatch,
+            depthBatch,
+            normalBatch,
             visLampShadowPreds, visLampMeshNames
         )
 
@@ -527,8 +527,8 @@ for dataId in range(max(opt.rs, 0), min(opt.re, len(dirList ) ) ):
         = renderInvWindowArr(
             invWinCenterPred, invWinNormalPred, invWinXAxisPred, invWinYAxisPred,
             invWinSrcPred, invWinSrcSkyPred, invWinSrcGrdPred,
-            depthDS if not opt.isHighRes else depthBatch,
-            normalDS if not opt.isHighRes else normalBatch,
+            depthBatch,
+            normalBatch,
             invWinShadowPred
         )
 
@@ -537,23 +537,19 @@ for dataId in range(max(opt.rs, 0), min(opt.re, len(dirList ) ) ):
         = renderInvLampArr(
             invLampAxesPred, invLampCenterPred,
             invLampSrcPred,
-            depthDS if not opt.isHighRes else depthBatch,
-            normalDS if not opt.isHighRes else normalBatch,
+            depthBatch,
+            normalBatch,
             invLampShadowPred
         )
 
     # Predict the global illumination
     if len(visWinSrcPreds ) > 0:
-        visWinShadingNoPreds = torch.cat(visWinShadingNoPreds, dim=0 ).reshape(
-                1, visWinNum, 3, height if opt.isHighRes else sHeight, width if opt.isHighRes else sWidth )
-        visWinShadingPreds = torch.cat(visWinShadingPreds, dim=0 ).reshape(
-                1, visWinNum, 3, height if opt.isHighRes else sHeight, width if opt.isHighRes else sWidth )
+        visWinShadingNoPreds = torch.cat(visWinShadingNoPreds, dim=0 ).reshape(1, visWinNum, 3, height, width )
+        visWinShadingPreds = torch.cat(visWinShadingPreds, dim=0 ).reshape(1, visWinNum, 3, height, width )
 
     if len(visLampSrcPreds ) > 0:
-        visLampShadingNoPreds = torch.cat(visLampShadingNoPreds, dim=0 ).reshape(
-                1, visLampNum, 3, height if opt.isHighRes else sHeight, width if opt.isHighRes else sWidth )
-        visLampShadingPreds = torch.cat(visLampShadingPreds, dim=0 ).reshape(
-                1, visLampNum, 3, height if opt.isHighRes else sHeight, width if opt.isHighRes else sWidth )
+        visLampShadingNoPreds = torch.cat(visLampShadingNoPreds, dim=0 ).reshape(1, visLampNum, 3, height, width )
+        visLampShadingPreds = torch.cat(visLampShadingPreds, dim=0 ).reshape(1, visLampNum, 3, height, width )
 
     shadingDirectPred = invWinShadingPred + invLampShadingPred
     if len(visWinSrcPreds ) > 0:
@@ -562,16 +558,11 @@ for dataId in range(max(opt.rs, 0), min(opt.re, len(dirList ) ) ):
     if len(visLampSrcPreds ) > 0:
         shadingDirectPred += torch.sum(visLampShadingPreds, dim=1 )
 
-    if not opt.isHighRes:
-        shadingDirectPred = shadingDirectPred * envMaskSmallBatch + (1 - envMaskSmallBatch) * imSmallBatch
-        shadingDirectPred = shadingDirectPred * (1 - onMaskSmallBatch ) + onMaskSmallBatch * imSmallBatch
-    else:
-        shadingDirectPred = shadingDirectPred * envMaskBatch + (1 - envMaskBatch) * imBatch
-        shadingDirectPred = shadingDirectPred * (1 - onMaskBatch) + onMaskBatch * imBatch
+    shadingDirectPred = shadingDirectPred * envMaskBatch + (1 - envMaskBatch) * imBatch
+    shadingDirectPred = shadingDirectPred * (1 - onMaskBatch) + onMaskBatch * imBatch
 
     shadingDirectPredInput = torch.atan(shadingDirectPred ) / np.pi * 2.0
-    if opt.isHighRes:
-        shadingDirectPredInput = F.adaptive_avg_pool2d(shadingDirectPredInput, (sHeight, sWidth ) )
+    shadingDirectPredInput = F.adaptive_avg_pool2d(shadingDirectPredInput, (sHeight, sWidth ) )
 
 
     shadingIndirectPred = indirectLightNet(
@@ -581,34 +572,23 @@ for dataId in range(max(opt.rs, 0), min(opt.re, len(dirList ) ) ):
             shadingDirectPredInput.detach(),
             onMaskSmallBatch )
 
-    if opt.isHighRes:
-        shadingIndirectPred = F.interpolate(shadingIndirectPred, (height, width), mode = 'bilinear')
+    shadingIndirectPred = F.interpolate(shadingIndirectPred, (height, width), mode = 'bilinear')
 
 
     shadingPred = shadingIndirectPred + shadingDirectPred
 
-    if opt.isHighRes:
-        shadingPred = shadingPred * envMaskBatch + (1 - envMaskBatch) * imBatch
-        shadingPred = shadingPred * (1 - onMaskBatch) + onMaskBatch * imBatch
+    shadingPred = shadingPred * envMaskBatch + (1 - envMaskBatch) * imBatch
+    shadingPred = shadingPred * (1 - onMaskBatch) + onMaskBatch * imBatch
 
-        renderedPred = torch.clamp(shadingPred * albedoBatch, 0, 1 )
-        renderedPred = renderedPred * (1 - onMaskBatch ) + onMaskBatch * imBatch
-    else:
-        shadingPred = shadingPred * envMaskSmallBatch + (1 - envMaskSmallBatch) * imSmallBatch
-        shadingPred = shadingPred * (1 - onMaskSmallBatch) + onMaskSmallBatch * imSmallBatch
-
-        renderedPred = torch.clamp(shadingPred * albedoDS, 0, 1 )
-        renderedPred = renderedPred * (1 - onMaskSmallBatch ) + onMaskSmallBatch * imSmallBatch
+    renderedPred = torch.clamp(shadingPred * albedoBatch, 0, 1 )
+    renderedPred = renderedPred * (1 - onMaskBatch ) + onMaskBatch * imBatch
 
     # Predict per-pixel lighting
     if opt.isPerpixelLighting:
         timestart.record()
         inputBatch = torch.cat([albedoDS, normalDS, roughDS, depthDS, onMaskSmallBatch ], dim=1 )
 
-        if opt.isHighRes:
-            shadingPredInput = F.adaptive_avg_pool2d(shadingPred, (sHeight, sWidth ) )
-        else:
-            shadingPredInput = shadingPred
+        shadingPredInput = F.adaptive_avg_pool2d(shadingPred, (sHeight, sWidth ) )
 
         x1, x2, x3, x4, x5, x6 = lightEncoder(inputBatch, shadingPredInput )
 
@@ -674,24 +654,13 @@ for dataId in range(max(opt.rs, 0), min(opt.re, len(dirList ) ) ):
         cv2.imwrite(visLampShadowInitPngName, visLampShadowInitIm )
 
     # Save geometry
-    if opt.isHighRes:
-        utils.writeDepthAsPointClouds(
-            depthBatch * ( (1 - onMaskBatch) == 1 ).float(),
-            renderedPred ** (1 / 2.2 ),
-            envMaskBatch,
-            osp.join(outputDir, 'room.ply'),
-            isNormalize = False
-        )
-    else:
-        utils.writeDepthAsPointClouds(
-            depthDS * ( (1 - onMaskSmallBatch) == 1).float(),
-            renderedPred ** (1/2.2 ),
-            envMaskSmallBatch,
-            osp.join(outputDir, 'room.ply'),
-            isNormalize = False
-        )
-
-
+    utils.writeDepthAsPointClouds(
+        depthBatch * ( (1 - onMaskBatch) == 1 ).float(),
+        renderedPred ** (1 / 2.2 ),
+        envMaskBatch,
+        osp.join(outputDir, 'room.ply'),
+        isNormalize = False
+    )
 
     for n in range(0, visWinNum ):
         visWinShadingPred = visWinShadingPreds[0:1, n, :].detach().cpu().numpy()
