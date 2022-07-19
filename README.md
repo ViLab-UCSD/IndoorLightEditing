@@ -27,44 +27,44 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
       * Go to [OptixRendererShadow](OptixRendererShadow) directory. Compile the code following this [link](https://github.com/lzqsd/OptixRenderer.git). 
 3. Modify the pytorch3D code to support RMSE chamfer distance loss.
       * Go to [chamfer.py](https://github.com/facebookresearch/pytorch3d/blob/main/pytorch3d/loss/chamfer.py). 
-      * Add flag `isRMSE = False` to function `chamfer_distance`
-      * Modify function `chamfer_distance` by adding lines below after the definition of `cham_x` and `cham_y`
+      * Add flag `isRMSE = False` to function `chamfer_distance`.
+      * Modify function `chamfer_distance` by adding lines below after the definition of `cham_x` and `cham_y`.
       ```python
       if isRMSE == True:
           cham_x = torch.sqrt(cham_x + 1e-6)
           cham_y = torch.sqrt(cham_y + 1e-6)
       ```
-4. Train models 
+4. Train models. 
      * Train the material prediction network. 
      ```python
      python trainBRDF.py           # Train material prediction.
      ```
-     * Train light source prediction networks
+     * Train light source prediction networks.
      ```python
      python trainVisLamp.py        # Train visible lamp prediction.
      python trainVisWindow.py      # Train visible window prediction.
      python trainInvLamp.py        # Train invisible lamp prediction.
      python trainInvWindow.py      # Train invisible window prediction.
      ```
-     * Train the neural renderer
+     * Train the neural renderer.
      ```python
      python trainShadowDepth.py --isGradLoss      # Train shadow prediction.
      python trainDirectIndirect.py                # Train indirect illumination prediction.
      python trainPerpixelLighting.py              # Train perpixel lighting prediction.
      ```
-5. Test models
-     * Test the material prediction network
+5. Test models.
+     * Test the material prediction network.
      ```python
      python testBRDF.py            # Test BRDF prediction. Results in Table 5 in the supp.
      ```
-     * Test light source prediction networks
+     * Test light source prediction networks.
      ```python
      python testVisLamp.py         # Test visible lamp prediction. Results in Table 3 in the main paper.
      python testVisWindow.py       # Test visible window prediction. Results in Table 3 in the main paper. 
      python testInvLamp.py         # Test invisible lamp prediction. Results in Table 3 in the main paper.
      python testInvWindow.py       # Test invisible window prediction. Results in Table 3 in the main paper.
      ```
-     * Test the neural renderer
+     * Test the neural renderer.
      ```python
      python testShadowDepth.py --isGradLoss       # Test shadow prediction. Results in Table 2 in the main paper. 
      python testDirectIndirect.py                 # Test indirect illumination prediction. 
@@ -73,5 +73,9 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
      ```
     
 ## Scene editing applications on real images
-1. Depth prediction
-     * 
+1. Prepare input data.
+2. Depth prediction.
+3. Material and light source prediction.
+4. Edit light sources, geometry or materials.
+4. Rerender the image with the neural renderer.
+
