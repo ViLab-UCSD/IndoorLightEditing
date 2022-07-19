@@ -14,7 +14,6 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--experimentDepth', default='DPT', help='the path to store samples and models')
 parser.add_argument('--mode', default='dpt_large', help='the mode for the DPT models' )
 parser.add_argument('--testList', default=None, help='the path to store samples and models' )
-parser.add_argument('--isNormalizeDepth', action='store_true', help='whether to normalize the depth or not')
 
 # Starting and ending point
 parser.add_argument('--rs', type=int, default=0, help='starting point' )
@@ -65,8 +64,7 @@ runDepth.run(
         input_names,
         output_names,
         mask_names,
-        model_type = opt.mode,
-        isNormalizeDepth = opt.isNormalizeDepth )
+        model_type = opt.mode )
 
 for depthName in output_names:
     depth = np.load(depthName )
