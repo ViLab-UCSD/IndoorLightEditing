@@ -82,7 +82,7 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
           * `winMask_x.png`:
      * Create `testList.txt`. Add absolute path of `Example1` to its first line. 
      * An example from our teaser figure can be found in [Example1]().
-3. Depth prediction. We use [DPT](https://github.com/isl-org/DPT) in our paper. Higher quality depth captured by RBGD sensor should lead to better results. 
+3. Depth prediction. We use [DPT](https://github.com/isl-org/DPT) in our paper. Higher quality depth from RBGD sensor should lead to better results. 
      * Download [DPT](https://github.com/isl-org/DPT) and save it in folder `DPT`
      * Run python script `testRealDepth.py`. Result will be saved as `depth.npy` in `Example1/input`
      ```python
