@@ -83,7 +83,7 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
      * Create `testList.txt`. Add absolute path of `Example1` to its first line. 
 3. Depth prediction.
      * Download [DPT](https://github.com/isl-org/DPT) and save it in folder `DPT`
-     * Run python script `testRealDepth.py`
+     * Run python script `testRealDepth.py`. Result will be saved as `depth.npy` in `Example1/input`
      ```python
      python testRealDepth.py --testList testList.txt
      ```
