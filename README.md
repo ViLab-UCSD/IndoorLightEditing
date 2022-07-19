@@ -102,7 +102,7 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
           * Example1_turnOffInvLamp:
      * Please check `README.md` inside each folder to see how to generate results. To reproduce results in teaser, you may need to combine several editing operations together. 
 7. Rerender the image with the neural renderer.
-     * Run python script `testRealRender.py`. You may need to specify `--objName` when inserting virtual object. You may need to specify `--isVisLampMesh` when inserting virtual lamps. You may need to specify `--isPerpixelLighting` to predict perpixel environment map, which is used to render specular bunnies on the [Garon et al. dataset](http://indoorsv.hdrdb.com/)
+     * Run python script `testRealRender.py`. You may need to specify `--objName` when inserting virtual objects. You may need to specify `--isVisLampMesh` when inserting virtual lamps. You may need to specify `--isPerpixelLighting` to predict perpixel environment maps, which is used to render specular bunnies on the [Garon et al. dataset](http://indoorsv.hdrdb.com/)
      ```python
      python testRealRender.py --testList testList.txt --isOptimize
      ```
