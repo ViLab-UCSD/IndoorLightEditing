@@ -100,6 +100,6 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
           * Example1_addLamp_turnOffPredLamps:
           * Example1_turnOffVisLamp:
           * Example1_turnOffInvLamp:
-     * Please check `README.md` inside each folder to see how to generate results.
+     * Please check `README.md` inside each folder to see how to generate results. To reproduce results in teaser, you may need to combine several editing together. 
 7. Rerender the image with the neural renderer.
      
