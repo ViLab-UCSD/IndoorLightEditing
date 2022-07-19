@@ -90,7 +90,7 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
 5. Material and light source prediction.
      * Run python script `testRealBRDFLight.py`. Please add flag `--isOptimize` to improve quality.
      ```python
-     python testRealBRDFLight.py --isOptimize
+     python testRealBRDFLight.py --testList testList.txt --isOptimize
      ```
 6. Edit light sources, geometry or materials.
      * We prepare a list of edited examples from our teaser figure.
@@ -100,6 +100,7 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
           * Example1_addLamp_turnOffPredLamps:
           * Example1_turnOffVisLamp:
           * Example1_turnOffInvLamp:
-     * Please check `README.md` inside each folder to see how to generate results. To reproduce results in teaser, you may need to combine several editing together. 
+     * Please check `README.md` inside each folder to see how to generate results. To reproduce results in teaser, you may need to combine several editing operations together. 
 7. Rerender the image with the neural renderer.
+
      
