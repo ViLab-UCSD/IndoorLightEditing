@@ -193,14 +193,12 @@ parser.add_argument('--winSrcLambWeight', type=float, default=0.001, help='the l
 
 # Starting and ending point
 parser.add_argument('--rs', type=int, default=0, help='starting point' )
-parser.add_argument('--re', type=int, default=100, help='ending point' )
+parser.add_argument('--re', type=int, default=1, help='ending point' )
 
 opt = parser.parse_args()
 print(opt )
 
 opt.gpuId = opt.deviceIds[0]
-torch.multiprocessing.set_sharing_strategy('file_system')
-torch.autograd.set_detect_anomaly(True )
 
 curDir = '/'.join(osp.abspath(__file__).split('/')[0:-1] )
 

@@ -560,7 +560,6 @@ parser.add_argument('--iterIdDirecIndirec', type=int, default=180000, help='the 
 parser.add_argument('--iterIdShadow', type=int, default=70000, help='the iteration used for testing')
 
 parser.add_argument('--isOptimize', action='store_true', help='use optimization for light sources or not' )
-parser.add_argument('--isNormalizeDepth', action='store_true', help='whether to normalize depth for input')
 parser.add_argument('--iterNum', type=int, default = 400, help='the number of interations for optimization')
 
 # The training weight
@@ -574,7 +573,7 @@ parser.add_argument('--winSrcLambWeight', type=float, default=0.001, help='the l
 
 # Starting and ending point
 parser.add_argument('--rs', type=int, default=0, help='starting point' )
-parser.add_argument('--re', type=int, default=100, help='ending point' )
+parser.add_argument('--re', type=int, default=1, help='ending point' )
 
 
 # The detail network setting
@@ -748,9 +747,6 @@ for dataId in range(max(opt.rs, 0), min(opt.re, len(dirList ) ) ):
 
     # depth size should be height x width
     depth = np.load(depthName )
-    if opt.isNormalizeDepth:
-        depthScale = np.maximum(np.mean(depth ), 1 ) / 3.0
-        depth = depth / depthScale
 
     if width != originWidth:
         depth = cv2.resize(depth, (width, height), interpolation = cv2.INTER_AREA )
