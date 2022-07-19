@@ -81,7 +81,7 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
           * `lampMask_x.png`: Masks for visible lamps. `x` is its ID starting from 0.
           * `winMask_x.png`: Masks for visible windows. `x` is its ID starting from 0. 
      * Create `testList.txt`. Add absolute path of `Example1` to its first line. 
-     * An example from our teaser figure can be found in [Example1]().
+     * An example from our teaser scene can be found in [Example1](https://drive.google.com/drive/folders/14JR51IUHuQBcUvI2NN53fdq1VAKGWDJC?usp=sharing).
 3. Depth prediction. We use [DPT](https://github.com/isl-org/DPT) in our paper. Higher quality depth from RBGD sensor should lead to better results. 
      * Download [DPT](https://github.com/isl-org/DPT) and save it in folder `DPT`
      * Run python script `testRealDepth.py`. Result will be saved as `depth.npy` in `Example1/input`
@@ -94,14 +94,14 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
      python testRealBRDFLight.py --testList testList.txt --isOptimize
      ```
 6. Edit light sources, geometry or materials.
-     * We prepare a list of edited examples from our teaser figure.
-          * [Example1_changeAlbedo](): Change wall colors with consistent indirect illumination.
-          * [Example1_addObject](): Insert virtual object with non-local shadows.
-          * [Example1_addWindow_turnOffPredLamps](): Open a virtual window with sunlight.
-          * [Example1_addLamp_turnOffPredLamps](): Insert a virtual lamp.
-          * [Example1_turnOffVisLamp](): Turn off the visible lamp in the scene.  
-          * [Example1_turnOffInvLamp](): Turn off the invisible lamp in the scene. 
-     * Please check `command.txt` inside each folder to see how to render results. To reproduce results in teaser, you may need to combine several editing operations together. 
+     * We prepare a list of edited examples from our teaser scene.
+          * [Example1_changeAlbedo](https://drive.google.com/drive/folders/1OrPnaJB_qz0i9iicJcx5xZ_o-SVNztJw?usp=sharing): Change wall colors with consistent indirect illumination.
+          * [Example1_addObject](https://drive.google.com/drive/folders/1YFhl2s6TbzaY5IDEWBTA1uCT1Y5rL4EX?usp=sharing): Insert virtual object with non-local shadows.
+          * [Example1_addWindow_turnOffVisLampM](https://drive.google.com/drive/folders/1ldKM9KuXZyLxC0U6skNFKOVMn0F7vqjQ?usp=sharing): Open a virtual window with sunlight.
+          * [Example1_addLamp_turnOffPredLamps](https://drive.google.com/drive/folders/1JvWeB3iz3B0dErdk5lKI4IR_K-6rd2Sj?usp=sharing): Insert a virtual lamp.
+          * [Example1_turnOffVisLamp](https://drive.google.com/drive/folders/1iWjX4rCXEdm3wTZya8lGagT44LnZ-DoI?usp=sharing): Turn off the visible lamp in the scene.  
+          * [Example1_turnOffInvLamp](https://drive.google.com/drive/folders/1jZLdqABaZqxgbFieB_SzfKr8IbTP-E1y?usp=sharing): Turn off the invisible lamp in the scene. 
+     * Please check `command.txt` inside each folder to see how to render results. To reproduce all results in the teaser, you may need to combine several editing operations together. 
 7. Rerender the image with the neural renderer.
      * Run python script `testRealRender.py`. You may need to specify `--objName` when inserting virtual objects. You may need to specify `--isVisLampMesh` when inserting virtual lamps. You may need to specify `--isPerpixelLighting` to predict perpixel environment maps, which are used to render specular bunnies on the [Garon et al. dataset](http://indoorsv.hdrdb.com/) in the paper.
      ```python
