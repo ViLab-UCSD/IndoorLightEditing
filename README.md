@@ -77,12 +77,12 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
      * Create a root folder, e.g. `Example1`. 
      * Create a folder `Example1/input` for input data. The folder should include:
           * `image.png`: Input RGB image of resolution `240 x 320`
-          * `envMask.png`: 
+          * `envMask.png`: An mask specify the re
           * `lampMask_x.png`:
           * `winMask_x.png`:
      * Create `testList.txt`. Add absolute path of `Example1` to its first line. 
      * An example from our teaser figure can be found in [Example1]().
-3. Depth prediction.
+3. Depth prediction. We use depth predicted by [DPT](https://github.com/isl-org/DPT) in our paper. Higher quality depth captured by RBGD sensor should lead to better results. 
      * Download [DPT](https://github.com/isl-org/DPT) and save it in folder `DPT`
      * Run python script `testRealDepth.py`. Result will be saved as `depth.npy` in `Example1/input`
      ```python
