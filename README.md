@@ -74,8 +74,18 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
     
 ## Scene editing applications on real images
 1. Prepare input data.
-2. Depth prediction.
-3. Material and light source prediction.
-4. Edit light sources, geometry or materials.
-4. Rerender the image with the neural renderer.
+     * Create a root folder, e.g. `Example1`. 
+     * Create a folder `Example1/input` for input data. The folder should include:
+          * `image.png`:
+          * `envMask.png`: 
+          * ``
+3. Depth prediction.
+     * Download [DPT](https://github.com/isl-org/DPT) and save it in folder `DPT`
+     * Run 
+5. Material and light source prediction.
+```python
+python testR
+```
+7. Edit light sources, geometry or materials.
+8. Rerender the image with the neural renderer.
 
