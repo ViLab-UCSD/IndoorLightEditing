@@ -580,8 +580,9 @@ for dataId in range(max(opt.rs, 0), min(opt.re, len(dirList ) ) ):
     shadingPred = shadingPred * envMaskBatch + (1 - envMaskBatch) * imBatch
     shadingPred = shadingPred * (1 - onMaskBatch) + onMaskBatch * imBatch
 
-    renderedPred = torch.clamp(shadingPred * albedoBatch, 0, 1 )
+    renderedPred = shadingPred * albedoBatch
     renderedPred = renderedPred * (1 - onMaskBatch ) + onMaskBatch * imBatch
+    renderedPred = torch.clamp(renderedPred, 0, 1)
 
     # Predict per-pixel lighting
     if opt.isPerpixelLighting:
@@ -756,7 +757,7 @@ for dataId in range(max(opt.rs, 0), min(opt.re, len(dirList ) ) ):
     renderedPred = renderedPred.detach().cpu().numpy()
     renderedPredIm = renderedPred.squeeze().transpose(1, 2, 0 )
     np.save(renderedName, renderedPred )
-    cv2.imwrite(renderedHdrName, renderedPredIm[:, :, ::-1])
+    cv2.imwrite(renderedHdrName, renderedPredIm[:, :, ::-1] )
 
     shadingDirectName = osp.join(outputDir, 'shadingDirect.npy')
     shadingDirectHdrName = osp.join(outputDir, 'shadingDirect.hdr')
