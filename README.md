@@ -93,7 +93,7 @@ We highly recommend using Anaconda to manage python packages. Required dependenc
      ```python
      python testRealBRDFLight.py --testList testList.txt --isOptimize
      ```
-     If you use real depth, such as depth reconstructed from a depth sensor or other 3D reconstruction algorithms, such as Colmap or MonoSDF, please add flag `--isNormalizeDepth` for better performances.
+     If you use real depth maps, e.g., depth maps captured by a depth sensor or reconstructed by a 3D reconstruction algorithms, such as Colmap or MonoSDF, please add flag `--isNormalizeDepth` for better performances, because the networks are trained on normalized depth maps.
 6. Edit light sources, geometry or materials.
      * We prepare a list of edited examples from our teaser scene.
           * [Example1_changeAlbedo](https://drive.google.com/drive/folders/1OrPnaJB_qz0i9iicJcx5xZ_o-SVNztJw?usp=sharing): Change wall colors with consistent indirect illumination.
