@@ -460,12 +460,12 @@ def optimizeLightSources(
 
         # Predict the global illumination
         if len(visWinSrcPreds ) > 0:
-            visWinShadingNoPreds = torch.cat(visWinShadingNoPreds, dim=0 ).reshape( 1, visWinNum, 3, opt.envRow, opt.envCol )
-            visWinShadingPreds = torch.cat(visWinShadingPreds, dim=0 ).reshape( 1, visWinNum, 3, opt.envRow, opt.envCol )
+            visWinShadingNoPreds = torch.cat(visWinShadingNoPreds, dim=0 ).reshape( 1, visWinNum, 3, height, width )
+            visWinShadingPreds = torch.cat(visWinShadingPreds, dim=0 ).reshape( 1, visWinNum, 3, height, width )
 
         if len(visLampSrcPreds ) > 0:
-            visLampShadingNoPreds = torch.cat(visLampShadingNoPreds, dim=0 ).reshape(1, visLampNum, 3, opt.envRow, opt.envCol )
-            visLampShadingPreds = torch.cat(visLampShadingPreds, dim=0 ).reshape(1, visLampNum, 3, opt.envRow, opt.envCol )
+            visLampShadingNoPreds = torch.cat(visLampShadingNoPreds, dim=0 ).reshape(1, visLampNum, 3, height, width )
+            visLampShadingPreds = torch.cat(visLampShadingPreds, dim=0 ).reshape(1, visLampNum, 3, height, width )
 
         shadingDirectPred = invWinShadingPred + invLampShadingPred
         if len(visWinSrcPreds ) > 0:
@@ -740,7 +740,8 @@ for dataId in range(max(opt.rs, 0), min(opt.re, len(dirList ) ) ):
     im = cv2.imread(imName )[:, :, ::-1 ]
     originHeight, originWidth = im.shape[0:2 ]
     width = opt.imWidth
-    height = int(float(originWidth) / float(width) * originHeight )
+    height = int(float(width) / float(originWidth) * originHeight )
+    height = int(max(height, width / 1.6))
     if width != originWidth:
         im = cv2.resize(im, (width, height ), interpolation = cv2.INTER_AREA )
     sWidth, sHeight = int(width / 2.0), int(height / 2.0 )
@@ -1092,12 +1093,12 @@ for dataId in range(max(opt.rs, 0), min(opt.re, len(dirList ) ) ):
 
     # Predict the global illumination
     if len(visWinSrcPreds ) > 0:
-        visWinShadingNoPreds = torch.cat(visWinShadingNoPreds, dim=0 ).reshape( 1, visWinNum, 3, opt.envRow, opt.envCol )
-        visWinShadingPreds = torch.cat(visWinShadingPreds, dim=0 ).reshape( 1, visWinNum, 3, opt.envRow, opt.envCol )
+        visWinShadingNoPreds = torch.cat(visWinShadingNoPreds, dim=0 ).reshape( 1, visWinNum, 3, sHeight, sWidth )
+        visWinShadingPreds = torch.cat(visWinShadingPreds, dim=0 ).reshape( 1, visWinNum, 3, sHeight, sWidth )
 
     if len(visLampSrcPreds ) > 0:
-        visLampShadingNoPreds = torch.cat(visLampShadingNoPreds, dim=0 ).reshape(1, visLampNum, 3, opt.envRow, opt.envCol )
-        visLampShadingPreds = torch.cat(visLampShadingPreds, dim=0 ).reshape(1, visLampNum, 3, opt.envRow, opt.envCol )
+        visLampShadingNoPreds = torch.cat(visLampShadingNoPreds, dim=0 ).reshape(1, visLampNum, 3, sHeight, sWidth )
+        visLampShadingPreds = torch.cat(visLampShadingPreds, dim=0 ).reshape(1, visLampNum, 3, sHeight, sWidth )
 
     shadingDirectPred = invWinShadingPred + invLampShadingPred
     if len(visWinSrcPreds ) > 0:
